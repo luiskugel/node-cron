@@ -1,6 +1,6 @@
 {
-  "name": "node-cron",
-  "version": "3.0.3",
+  "name": "@idot-digital/node-cron",
+  "version": "4.0.0",
   "description": "A simple cron-like task scheduler for Node.js",
   "author": "Lucas Merencia",
   "license": "ISC",
@@ -35,9 +35,10 @@
     "chai": "^4.2.0",
     "eslint": "^5.7.0",
     "istanbul": "^0.4.2",
-    "mocha": "^6.1.4",
+    "mocha": "^10.4.0",
     "moment-timezone": "^0.5.33",
     "nyc": "^14.0.0",
+    "prettier": "3.2.5",
     "sinon": "^7.3.2"
   }
 }

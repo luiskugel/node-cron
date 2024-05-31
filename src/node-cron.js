@@ -22,18 +22,18 @@ const storage = require('./storage');
  * @returns {ScheduledTask} The scheduled task.
  */
 function schedule(expression, func, options) {
-    const task = createTask(expression, func, options);
+  const task = createTask(expression, func, options);
 
-    storage.save(task);
+  storage.save(task);
 
-    return task;
+  return task;
 }
 
 function createTask(expression, func, options) {
-    if (typeof func === 'string')
-        return new BackgroundScheduledTask(expression, func, options);
+  if (typeof func === 'string')
+    return new BackgroundScheduledTask(expression, func, options);
 
-    return new ScheduledTask(expression, func, options);
+  return new ScheduledTask(expression, func, options);
 }
 
 /**
@@ -43,13 +43,13 @@ function createTask(expression, func, options) {
  * @returns {boolean} Whether the expression is valid or not.
  */
 function validate(expression) {
-    try {
-        validation(expression);
+  try {
+    validation(expression);
 
-        return true;
-    } catch (_) {
-        return false;
-    }
+    return true;
+  } catch (_) {
+    return false;
+  }
 }
 
 /**
@@ -58,7 +58,7 @@ function validate(expression) {
  * @returns {ScheduledTask[]} The scheduled tasks.
  */
 function getTasks() {
-    return storage.getTasks();
+  return storage.getTasks();
 }
 
 module.exports = { schedule, validate, getTasks };
