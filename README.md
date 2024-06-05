@@ -1,27 +1,19 @@
-# Node Cron
+# @idot-digital/node-cron
 
-[![npm](https://img.shields.io/npm/l/node-cron.svg)](https://github.com/merencia/node-cron/blob/master/LICENSE.md)
-[![npm](https://img.shields.io/npm/v/node-cron.svg)](https://img.shields.io/npm/v/node-cron.svg)
-[![Coverage Status](https://coveralls.io/repos/github/node-cron/node-cron/badge.svg?branch=master)](https://coveralls.io/github/node-cron/node-cron?branch=master)
-[![Code Climate](https://codeclimate.com/github/node-cron/node-cron/badges/gpa.svg)](https://codeclimate.com/github/merencia/node-cron)
-[![Build Status](https://travis-ci.org/node-cron/node-cron.svg?branch=master)](https://travis-ci.org/merencia/node-cron)
-[![Dependency Status](https://david-dm.org/node-cron/node-cron.svg)](https://david-dm.org/merencia/node-cron)
-[![devDependency Status](https://david-dm.org/node-cron/node-cron/dev-status.svg)](https://david-dm.org/merencia/node-cron#info=devDependencies)
-[![Backers on Open Collective](https://opencollective.com/node-cron/backers/badge.svg)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/node-cron/sponsors/badge.svg)](#sponsors)
+This is a fork of the original [node-cron](https://github.com/node-cron/node-cron) package. It adds a remove function to a task, to delete it fully.
+
+---
 
 The node-cron module is tiny task scheduler in pure JavaScript for node.js based on [GNU crontab](https://www.gnu.org/software/mcron/manual/html_node/Crontab-file.html). This module allows you to schedule task in node.js using full crontab syntax.
 
 **Need a job scheduler with support for worker threads and cron syntax?** Try out the [Bree](https://github.com/breejs/bree) job scheduler!
 
-[![NPM](https://nodei.co/npm/node-cron.png?downloads=true&downloadRank=true&stars=false)](https://nodei.co/npm/node-cron/)
-
 ## Getting Started
 
-Install node-cron using npm:
+Install using npm:
 
 ```console
-npm install --save node-cron
+npm install --save @idot-digital/node-cron
 ```
 
 Import node-cron and schedule a task:
@@ -29,7 +21,7 @@ Import node-cron and schedule a task:
 - commonjs
 
 ```javascript
-const cron = require('node-cron');
+const cron = require('@idot-digital/node-cron');
 
 cron.schedule('* * * * *', () => {
   console.log('running a task every minute');
@@ -39,7 +31,7 @@ cron.schedule('* * * * *', () => {
 - es6 (module)
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('* * * * *', () => {
   console.log('running a task every minute');
@@ -80,7 +72,7 @@ This is a quick reference to cron syntax and also shows the options supported by
 You may use multiples values separated by comma:
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('1,2,4,5 * * * *', () => {
   console.log('running every minute 1, 2, 4 and 5');
@@ -92,7 +84,7 @@ cron.schedule('1,2,4,5 * * * *', () => {
 You may also define a range of values:
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('1-5 * * * *', () => {
   console.log('running every minute to 1 from 5');
@@ -104,7 +96,7 @@ cron.schedule('1-5 * * * *', () => {
 Step values can be used in conjunction with ranges, following a range with '/' and a number. e.g: `1-10/2` that is the same as `2,4,6,8,10`. Steps are also permitted after an asterisk, so if you want to say “every two minutes”, just use `*/2`.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('*/2 * * * *', () => {
   console.log('running a task every two minutes');
@@ -116,7 +108,7 @@ cron.schedule('*/2 * * * *', () => {
 For month and week day you also may use names or short names. e.g:
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('* * * January,September Sunday', () => {
   console.log('running on Sundays of January and September');
@@ -126,7 +118,7 @@ cron.schedule('* * * January,September Sunday', () => {
 Or with short names:
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 cron.schedule('* * * Jan,Sep Sun', () => {
   console.log('running on Sundays of January and September');
@@ -147,22 +139,26 @@ Arguments:
 
 #### Options
 
- - **scheduled**: A `boolean` to set if the created task is scheduled. Default `true`;
- - **recoverMissedExecutions**: A `boolean` to set if the created task should be able to recover missed executions. Default `false`;
- - **timezone**: The timezone that is used for job scheduling. See [IANA time zone database](https://www.iana.org/time-zones) for valid values, such as `Asia/Shanghai`, `Asia/Kolkata`, `America/Sao_Paulo`.
+- **scheduled**: A `boolean` to set if the created task is scheduled. Default `true`;
+- **recoverMissedExecutions**: A `boolean` to set if the created task should be able to recover missed executions. Default `false`;
+- **timezone**: The timezone that is used for job scheduling. See [IANA time zone database](https://www.iana.org/time-zones) for valid values, such as `Asia/Shanghai`, `Asia/Kolkata`, `America/Sao_Paulo`.
 
- **Example**:
+**Example**:
 
- ```js
-  import cron from 'node-cron';
+```js
+import cron from '@idot-digital/node-cron';
 
-  cron.schedule('0 1 * * *', () => {
+cron.schedule(
+  '0 1 * * *',
+  () => {
     console.log('Running a job at 01:00 at America/Sao_Paulo timezone');
-  }, {
+  },
+  {
     scheduled: true,
-    timezone: "America/Sao_Paulo"
-  });
- ```
+    timezone: 'America/Sao_Paulo',
+  }
+);
+```
 
 ## ScheduledTask methods
 
@@ -171,13 +167,17 @@ Arguments:
 Starts the scheduled task.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
-const task = cron.schedule('* * * * *', () =>  {
-  console.log('stopped task');
-}, {
-  scheduled: false
-});
+const task = cron.schedule(
+  '* * * * *',
+  () => {
+    console.log('stopped task');
+  },
+  {
+    scheduled: false,
+  }
+);
 
 task.start();
 ```
@@ -187,9 +187,9 @@ task.start();
 The task won't be executed unless re-started.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
-const task = cron.schedule('* * * * *', () =>  {
+const task = cron.schedule('* * * * *', () => {
   console.log('will execute every minute until stopped');
 });
 
@@ -201,7 +201,7 @@ task.stop();
 Validate that the given string is a valid cron expression.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 const valid = cron.validate('59 * * * *');
 const invalid = cron.validate('60 * * * *');
@@ -212,13 +212,17 @@ const invalid = cron.validate('60 * * * *');
 You can name your tasks to make it easier to identify them in the logs.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
-const task = cron.schedule('* * * * *', () =>  {
-  console.log('will execute every minute until stopped');
-}, {
-  name: 'my-task'
-});
+const task = cron.schedule(
+  '* * * * *',
+  () => {
+    console.log('will execute every minute until stopped');
+  },
+  {
+    name: 'my-task',
+  }
+);
 ```
 
 ### List tasks
@@ -226,54 +230,45 @@ const task = cron.schedule('* * * * *', () =>  {
 You can list all the tasks that are currently running.
 
 ```javascript
-import cron from 'node-cron';
+import cron from '@idot-digital/node-cron';
 
 const tasks = cron.getTasks();
 
 for (let [key, value] of tasks.entries()) {
-  console.log("key", key)
-  console.log("value", value)
+  console.log('key', key);
+  console.log('value', value);
 }
 ```
 
 value is an object with the following properties:
 
-- _events
-- _eventsCount
-- _maxListeners
+- \_events
+- \_eventsCount
+- \_maxListeners
 - options
-- _task
+- \_task
 - etc...
 
 ## Issues
 
-Feel free to submit issues and enhancement requests [here](https://github.com/merencia/node-cron/issues).
+This is an interal fork, so please report any issues with the original package to the original repository. Otherwise the fork is not maintained.
 
 ## Contributing
 
-In general, we follow the "fork-and-pull" Git workflow.
+Contributions to this fork are not accepted. Please contribute to the original repository.
 
-- Fork the repo on GitHub;
-- Commit changes to a branch in your fork;
-- Pull request "upstream" with your changes;
+## Contributors (of the original repository)
 
-NOTE: Be sure to merge the latest from "upstream" before making a pull request!
-
-Please do not contribute code you did not write yourself, unless you are certain you have the legal ability to do so. Also ensure all contributed code can be distributed under the ISC License.
-
-## Contributors
-
-This project exists thanks to all the people who contribute. 
+This project exists thanks to all the people who contribute.
 <a href="https://github.com/node-cron/node-cron/graphs/contributors"><img src="https://opencollective.com/node-cron/contributors.svg?width=890&button=false" /></a>
 
-
-## Backers
+## Backers (of the original repository)
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/node-cron#backer)]
 
 <a href="https://opencollective.com/node-cron#backers" target="_blank"><img src="https://opencollective.com/node-cron/backers.svg?width=890"></a>
 
-## Sponsors
+## Sponsors (of the original repository)
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/node-cron#sponsor)]
 
@@ -290,4 +285,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ## License
 
-node-cron is under [ISC License](https://github.com/merencia/node-cron/blob/master/LICENSE.md).
+This fork is licensed under ISC same as the original repository. See the [LICENSE](LICENSE.md) file for details.
