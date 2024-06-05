@@ -1,0 +1,15 @@
+publish:
+  image: idotdigital/builder-node:latest
+  before_script:
+    - echo -e "@idot-digital:registry=https://git.idot.digital/api/v4/packages/npm/\n//git.idot.digital/api/v4/packages/npm/:_authToken=\"${GITLAB_AUTH_TOKEN}\"\n//git.idot.digital/api/v4/projects/83/packages/npm/:_authToken="${CI_JOB_TOKEN}"\n//git.idot.digital/api/v4/projects/:_authToken=\"${GITLAB_AUTH_TOKEN}\"" > .npmrc
+  script:
+    - bun install --frozen-lockfile
+    - npm publish
+  cache:
+    - key: '${CI_COMMIT_SHA}-node-modules'
+      paths:
+        - ./node_modules
+  only:
+    - master
+  tags:
+    - amd64

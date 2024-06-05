@@ -10,7 +10,7 @@
     "test": "nyc --reporter=html --reporter=text mocha --recursive"
   },
   "publishConfig": {
-    "@idot-digital:registry": "https://git.idot.digital/api/v4/projects/71/packages/npm/"
+    "@idot-digital:registry": "https://git.idot.digital/api/v4/projects/83/packages/npm/"
   },
   "engines": {
     "node": ">=6.0.0"

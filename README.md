@@ -2,6 +2,13 @@
 
 This is a fork of the original [node-cron](https://github.com/node-cron/node-cron) package. It adds a remove function to a task, to delete it fully.
 
+IMPORTANT: When working with this repository, always set it up to push to github and gitlab at the same time. This is to ensure that the changes are kept in sync.
+
+```bash
+git remote set-url --add --push origin <github>
+git remote set-url --add --push origin <gitlab>
+```
+
 ---
 
 The node-cron module is tiny task scheduler in pure JavaScript for node.js based on [GNU crontab](https://www.gnu.org/software/mcron/manual/html_node/Crontab-file.html). This module allows you to schedule task in node.js using full crontab syntax.
